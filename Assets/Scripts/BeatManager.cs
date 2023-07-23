@@ -3,43 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/*
- * Code sourced from b3agz Youtube https://www.youtube.com/watch?v=gIjajeyjRfE
-*/
-public class BeatManager : MonoBehaviour
+namespace HarropCharlie.MusicGame
 {
-    [SerializeField] private float _bpm;
-    [SerializeField] private AudioSource _source;
-    [SerializeField] private Intervals[] _intervals;
-
-    private void Update()
+    /*
+     * Code sourced from b3agz Youtube https://www.youtube.com/watch?v=gIjajeyjRfE
+    */
+    public class BeatManager : MonoBehaviour
     {
-        foreach (Intervals interval in _intervals)
+        [SerializeField] private float _bpm;
+        [SerializeField] private AudioSource _source;
+        [SerializeField] private Intervals[] _intervals;
+
+        private void Update()
         {
-            float sampledTime = (_source.timeSamples / (_source.clip.frequency * interval.GetBeatLength(_bpm)));
-            interval.CheckForNewInterval(sampledTime);
+            foreach (Intervals interval in _intervals)
+            {
+                float sampledTime = (_source.timeSamples / (_source.clip.frequency * interval.GetBeatLength(_bpm)));
+                interval.CheckForNewInterval(sampledTime);
+            }
         }
     }
-}
 
-[System.Serializable]
-public class Intervals
-{
-    [SerializeField] private float _steps;
-    [SerializeField] private UnityEvent _trigger;
-    private int _lastInterval;
-
-    public float GetBeatLength(float bpm)
+    [System.Serializable]
+    public class Intervals
     {
-        return 60f / (bpm * _steps);
-    }
+        [SerializeField] private float _steps;
+        [SerializeField] private UnityEvent _trigger;
+        private int _lastInterval;
 
-    public void CheckForNewInterval(float interval)
-    {
-        if (Mathf.FloorToInt(interval) != _lastInterval) 
+        public float GetBeatLength(float bpm)
         {
-            _lastInterval = Mathf.FloorToInt(interval);
-            _trigger.Invoke();
+            return 60f / (bpm * _steps);
+        }
+
+        public void CheckForNewInterval(float interval)
+        {
+            if (Mathf.FloorToInt(interval) != _lastInterval)
+            {
+                _lastInterval = Mathf.FloorToInt(interval);
+                _trigger.Invoke();
+            }
         }
     }
 }

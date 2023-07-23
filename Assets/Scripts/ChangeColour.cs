@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeColour : MonoBehaviour
+namespace HarropCharlie.MusicGame
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    public class ChangeColour : MonoBehaviour
+    {
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-    public void RandomColour()
-    {
-        spriteRenderer.color = Random.ColorHSV();
+        private void Start()
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        public void RandomColour()
+        {
+            spriteRenderer.color = Random.ColorHSV();
+        }
     }
 }
