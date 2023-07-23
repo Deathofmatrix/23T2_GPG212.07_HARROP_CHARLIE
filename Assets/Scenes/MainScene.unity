@@ -3199,7 +3199,7 @@ MonoBehaviour:
   _bpm: 120
   _source: {fileID: 1617737977}
   _intervals:
-  - _steps: 1
+  - _steps: 0.5
     _trigger:
       m_PersistentCalls:
         m_Calls:
