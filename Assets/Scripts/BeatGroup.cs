@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BeatGroup : MonoBehaviour
+namespace HarropCharlie.MusicGame
 {
-    [SerializeField] private UnityEvent _objectsToSwitch;
-
-    public void SwitchObjectState()
+    public class BeatGroup : MonoBehaviour
     {
-        _objectsToSwitch.Invoke();
+        [SerializeField] private UnityEvent _objectsToSwitch;
+
+        public void SwitchObjectState()
+        {
+            _objectsToSwitch.Invoke();
+        }
     }
 }

@@ -40,6 +40,9 @@ namespace HarropCharlie.MusicGame
         private Rigidbody2D _rB2D;
         private float _moveInput;
 
+        private Animator _animator;
+        private SpriteRenderer _spriteRenderer;
+
         private void OnEnable()
         {
             jump.action.performed += OnJump;
@@ -55,6 +58,8 @@ namespace HarropCharlie.MusicGame
         private void Start()
         {
             _rB2D = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
 
             gravityScale = _rB2D.gravityScale;
         }
@@ -87,6 +92,11 @@ namespace HarropCharlie.MusicGame
             #region Timers
             lastGroundedTime -= Time.deltaTime;
             lastJumpTime -= Time.deltaTime;
+            #endregion
+
+            #region Visuals
+            flipDirectionFacing();
+            MoveAnimations();
             #endregion
         }
 
@@ -143,6 +153,40 @@ namespace HarropCharlie.MusicGame
             }
 
             lastJumpTime = 0;
+        }
+
+        private void flipDirectionFacing()
+        {
+            if (_moveInput < 0 )
+            {
+                _spriteRenderer.flipX = false;
+            }
+            else if ( _moveInput > 0 )
+            {
+                _spriteRenderer.flipX = true;
+            }
+        }
+
+        private void MoveAnimations()
+        {
+            if (_moveInput != 0 )
+            {
+                _animator.SetBool("isWalking", true);
+            }
+            if (_moveInput == 0 )
+            {
+                _animator.SetBool("isWalking", false);
+            }
+
+            if (isJumping)
+            {
+                _animator.SetBool("isJumping", true);
+            }
+
+            if (!isJumping)
+            {
+                _animator.SetBool("isJumping", false);
+            }
         }
     }
 }
