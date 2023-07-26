@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4224630953886783015}
   - component: {fileID: 4224630953886783014}
   - component: {fileID: 1744520535556372962}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FlickerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1890469895, guid: 1502de3ef99f0aa4e8301595da44cb66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4224630954032273645}
   - component: {fileID: 4224630954032273554}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FlickerBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4224630954032273644}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -6,7 +6,7 @@ namespace HarropCharlie.MusicGame
 {
     public class BlockVIsibility : MonoBehaviour
     {
-        [SerializeField] private GameObject childToToggle;
+        [SerializeField] private GameObject[] childToToggle;
         [SerializeField] private int numberofBeatsPassed;
 
         [SerializeField] private bool isBlockVisible;
@@ -15,13 +15,19 @@ namespace HarropCharlie.MusicGame
         {
             if (isBlockVisible)
             {
-                childToToggle.SetActive(false);
-                isBlockVisible = false;
+                for (int i = 0; i < childToToggle.Length; i++)
+                {
+                    childToToggle[i].SetActive(false);
+                    isBlockVisible = false;
+                }
             }
             else if (!isBlockVisible)
             {
-                childToToggle.SetActive(true);
-                isBlockVisible = true;
+                for (int i = 0;i < childToToggle.Length; i++)
+                {
+                    childToToggle[i].SetActive(true);
+                    isBlockVisible = true;
+                }
             }
         }
 

@@ -6,16 +6,17 @@ namespace HarropCharlie.MusicGame
 {
     public class Flag : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public delegate void SetCheckpointAction(int checkpointNumber, Transform flagTransform);
+        public static event SetCheckpointAction OnEnterFlag;
 
-        // Update is called once per frame
-        void Update()
+        [SerializeField] private int checkpointNumber;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-        
+            if (collision.CompareTag("Player"))
+            {
+                OnEnterFlag(checkpointNumber, gameObject.transform);
+            }
         }
     }
 }

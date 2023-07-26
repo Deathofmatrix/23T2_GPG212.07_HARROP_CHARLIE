@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,11 @@ namespace HarropCharlie.MusicGame
     */
     public class PlayerCharacterController : MonoBehaviour
     {
+        public delegate void PlayerInvisibleAction();
+        public static event PlayerInvisibleAction OnPlayerInvisible;
+
+        public static Transform playerParent;
+
         [SerializeField] private InputActionReference move, jump;
 
         [Header("Run")]
@@ -62,6 +68,8 @@ namespace HarropCharlie.MusicGame
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
             gravityScale = _rB2D.gravityScale;
+
+            playerParent = transform.parent;
         }
 
         private void Update()
@@ -187,6 +195,17 @@ namespace HarropCharlie.MusicGame
             {
                 _animator.SetBool("isJumping", false);
             }
+        }
+
+        private void OnBecameInvisible()
+        {
+            StartCoroutine(Respawn()); 
+        }
+
+        private IEnumerator Respawn()
+        {
+            yield return new WaitForEndOfFrame();
+            OnPlayerInvisible();
         }
     }
 }

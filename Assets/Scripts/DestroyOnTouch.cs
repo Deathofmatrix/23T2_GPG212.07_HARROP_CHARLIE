@@ -10,7 +10,7 @@ namespace HarropCharlie.MusicGame
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                collision.gameObject.SetActive(false);
+                collision.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
     }
