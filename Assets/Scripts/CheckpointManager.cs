@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace HarropCharlie.MusicGame
 {
@@ -34,6 +35,11 @@ namespace HarropCharlie.MusicGame
             {
                 currentCheckpoint = checkpointNumber;
                 currentCheckpointTransform = flagTransform;
+            }
+
+            if (checkpointNumber == 7)
+            {
+                SceneManager.LoadScene(2);
             }
         }
 
