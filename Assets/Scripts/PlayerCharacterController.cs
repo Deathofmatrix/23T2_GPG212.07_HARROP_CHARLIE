@@ -1,3 +1,4 @@
+using EasyAudioSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,17 +49,24 @@ namespace HarropCharlie.MusicGame
 
         private Animator _animator;
         private SpriteRenderer _spriteRenderer;
+        [SerializeField] private ParticleSystem _particleSystem;
 
         private void OnEnable()
         {
             jump.action.performed += OnJump;
             jump.action.canceled += JumpCut;
+
+            move.action.performed += WalkSound;
+            move.action.canceled += WalkSound;
         }
 
         private void OnDisable()
         {
             jump.action.performed -= OnJump;
             jump.action.canceled -= JumpCut;
+
+            move.action.performed -= WalkSound;
+            move.action.canceled -= WalkSound;
         }
 
         private void Start()
@@ -144,6 +152,7 @@ namespace HarropCharlie.MusicGame
             lastGroundedTime = 0;
             lastJumpTime = 0;
             isJumping = true;
+            FindObjectOfType<AudioManager>().Play("Jump");
 
         }
 
@@ -180,10 +189,12 @@ namespace HarropCharlie.MusicGame
             if (_moveInput != 0 )
             {
                 _animator.SetBool("isWalking", true);
+                _particleSystem.Play();
             }
             if (_moveInput == 0 )
             {
                 _animator.SetBool("isWalking", false);
+                _particleSystem.Stop();
             }
 
             if (isJumping)
@@ -206,6 +217,18 @@ namespace HarropCharlie.MusicGame
         {
             yield return new WaitForEndOfFrame();
             OnPlayerInvisible();
+        }
+
+        private void WalkSound(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed && !isJumping)
+            {
+                FindObjectOfType<AudioManager>().Play("Footsteps");
+            }
+            if (ctx.canceled || isJumping)
+            {
+                FindObjectOfType<AudioManager>().Pause("Footsteps");
+            }
         }
     }
 }

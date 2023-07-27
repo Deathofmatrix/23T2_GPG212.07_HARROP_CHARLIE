@@ -1,3 +1,4 @@
+using EasyAudioSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace HarropCharlie.MusicGame
                 if (!hasFlagBeenTriggered)
                 {
                     myParticleSystem.Play();
+                    FindObjectOfType<AudioManager>().Play("Checkpoint");
                     hasFlagBeenTriggered = true;
                 }
             }
