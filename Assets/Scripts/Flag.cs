@@ -10,12 +10,19 @@ namespace HarropCharlie.MusicGame
         public static event SetCheckpointAction OnEnterFlag;
 
         [SerializeField] private int checkpointNumber;
+        [SerializeField] private bool hasFlagBeenTriggered;
+        [SerializeField] private ParticleSystem myParticleSystem;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
                 OnEnterFlag(checkpointNumber, gameObject.transform);
+                if (!hasFlagBeenTriggered)
+                {
+                    myParticleSystem.Play();
+                    hasFlagBeenTriggered = true;
+                }
             }
         }
     }
